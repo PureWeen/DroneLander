@@ -11,6 +11,13 @@ namespace DroneLander
 {
     public partial class App : Application
     {
+        public static Services.IAuthenticationService Authenticator { get; private set; }
+
+        public static void InitializeAuthentication(Services.IAuthenticationService authenticator)
+        {
+            Authenticator = authenticator;
+        }
+
         public static MainViewModel ViewModel { get; set; }
         public App()
         {

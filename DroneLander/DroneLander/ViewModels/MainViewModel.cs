@@ -1,19 +1,12 @@
 ﻿using DroneLander.Common;
-
 using System;
-
 using System.Collections.Generic;
-
 using System.Linq;
-
 using System.Text;
-
 using System.Threading.Tasks;
-
 using System.Windows.Input;
-
 using Xamarin.Forms;
-
+using System.Collections.ObjectModel;
 
 
 namespace DroneLander
@@ -25,25 +18,17 @@ namespace DroneLander
     {
 
         public MainViewModel(MainPage activityPage)
-
         {
-
             this.ActivityPage = activityPage;
-
             this.ActiveLandingParameters = new LandingParameters();
-
             this.Altitude = this.ActiveLandingParameters.Altitude;
-
             this.Velocity = this.ActiveLandingParameters.Velocity;
-
             this.Fuel = this.ActiveLandingParameters.Fuel;
-
             this.Thrust = this.ActiveLandingParameters.Thrust;
-
             this.FuelRemaining = CoreConstants.StartingFuel;
-
             this.IsActive = false;
-
+            this.CurrentActivity = new ObservableCollection<ActivityItem>();
+            this.SignInLabel = "Sign In";
         }
 
 
@@ -192,7 +177,52 @@ namespace DroneLander
 
         }
 
+        public System.Windows.Input.ICommand SignInCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    this.CurrentActivity.Clear();
 
+                    if (this.IsAuthenticated)
+                    {
+                        this.IsAuthenticated = !(await App.Authenticator.SignOutAsync());
+                    }
+                    else
+                    {
+                        this.IsAuthenticated = await App.Authenticator.SignInAsync();
+                        if (this.IsAuthenticated) this.UserId = TelemetryManager.DefaultManager.CurrentClient.CurrentUser.UserId.Split(':').LastOrDefault();
+                    }
+
+                    this.SignInLabel = (this.IsAuthenticated) ? "Sign Out" : "Sign In";
+                    var activityToolbarItem = this.ActivityPage.ToolbarItems.Where(w => w.AutomationId.Equals("ActivityLabel")).FirstOrDefault();
+
+                    if (this.IsAuthenticated)
+                    {
+                        if (activityToolbarItem == null)
+                        {
+                            activityToolbarItem = new ToolbarItem()
+                            {
+                                Text = "Activity",
+                                AutomationId = "ActivityLabel",
+                            };
+
+                            activityToolbarItem.Clicked += (s, e) =>
+                            {
+                                this.ActivityPage.Navigation.PushModalAsync(new ViewActivityPage(), true);
+                            };
+
+                            this.ActivityPage.ToolbarItems.Insert(0, activityToolbarItem);
+                        }
+                    }
+                    else
+                    {
+                        if (activityToolbarItem != null) this.ActivityPage.ToolbarItems.Remove(activityToolbarItem);
+                    }
+                });
+            }
+        }
 
         public ICommand AttemptLandingCommand
         {
@@ -260,15 +290,14 @@ namespace DroneLander
                         this.Thrust = this.ActiveLandingParameters.Thrust;
                     });
 
-                    if (this.ActiveLandingParameters.Velocity > -5.0)
+                    LandingResultType landingResult = (this.ActiveLandingParameters.Velocity > -5.0) ? LandingResultType.Landed : LandingResultType.Kaboom;
+
+                    if (this.IsAuthenticated)
                     {
-                        MessagingCenter.Send(this.ActivityPage, "ActivityUpdate", LandingResultType.Landed);
-                    }
-                    else
-                    {
-                        MessagingCenter.Send(this.ActivityPage, "ActivityUpdate", LandingResultType.Kaboom);
+                        Helpers.ActivityHelper.AddActivityAsync(landingResult);
                     }
 
+                    MessagingCenter.Send(this.ActivityPage, "ActivityUpdate", landingResult);
                     return false;
                 }
             });
@@ -374,7 +403,55 @@ namespace DroneLander
 
         }
 
+        private bool _isAuthenticated;
+        public bool IsAuthenticated
+        {
+            get { return this._isAuthenticated; }
+            set { this.SetProperty(ref this._isAuthenticated, value); }
+        }
 
+        private string _userId;
+        public string UserId
+        {
+            get { return this._userId; }
+            set { this.SetProperty(ref this._userId, value); }
+        }
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return this._isBusy; }
+            set { this.SetProperty(ref this._isBusy, value); }
+        }
+
+        private string _signInLabel;
+        public string SignInLabel
+        {
+            get { return this._signInLabel; }
+            set { this.SetProperty(ref this._signInLabel, value); }
+        }
+
+        private ObservableCollection<ActivityItem> _currentActivity;
+        public ObservableCollection<ActivityItem> CurrentActivity
+        {
+            get { return this._currentActivity; }
+            set { this.SetProperty(ref this._currentActivity, value); }
+        }
+
+        public async void LoadActivityAsync()
+        {
+            this.IsBusy = true;
+            this.CurrentActivity.Clear();
+
+            var activities = await TelemetryManager.DefaultManager.GetAllActivityAync();
+
+            foreach (var activity in activities)
+            {
+                this.CurrentActivity.Add(activity);
+            }
+
+            this.IsBusy = false;
+        }
 
         public async void ResetLanding()
 
@@ -385,9 +462,6 @@ namespace DroneLander
 
 
             this.ActiveLandingParameters = new LandingParameters();
-
-
-
             this.Altitude = 5000.0;
 
             this.Velocity = 0.0;
