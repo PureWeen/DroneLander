@@ -35,6 +35,7 @@ namespace DroneLander.UITest
             app.PressVolumeDown();
             app.SetOrientationPortrait();
             app.Tap(x=> x.Button("Start"));
+            app.WaitForElement(x=> x.Button("Reset"));
             app.Flash(x => x.Button("Reset"));
             app.PressVolumeUp();
             app.PressVolumeUp();
