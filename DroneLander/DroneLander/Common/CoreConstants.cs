@@ -8,7 +8,7 @@ namespace DroneLander.Common
 {
     public static class MobileServiceConstants
     {
-        public const string AppUrl = "https://dronelandermobilepod.azurewebsites.net";
+        public const string AppUrl = "https://[YOUR_MOBILE_APP_NAME].azurewebsites.net";
     }
     public static class MobileCenterConstants
     {
