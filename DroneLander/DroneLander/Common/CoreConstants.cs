@@ -10,6 +10,7 @@ namespace DroneLander.Common
     {
         public const string AppUrl = "https://[YOUR_MOBILE_APP_NAME].azurewebsites.net";
     }
+
     public static class MobileCenterConstants
     {
         public const string AndroidAppId = "MOBILE_CENTER_ANDROID_APP_ID";
