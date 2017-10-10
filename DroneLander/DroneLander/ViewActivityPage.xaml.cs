@@ -21,6 +21,10 @@ namespace DroneLander
             base.OnAppearing();
             this.BindingContext = App.ViewModel;
             App.ViewModel.LoadActivityAsync();
+            this.ToolbarItems.Add(new ToolbarItem("Close", null, async () =>
+            {
+                await Navigation.PopModalAsync();
+            }));
         }
     }
 }

@@ -7,15 +7,15 @@
         <StackLayout>
             <Label FontAttributes="Bold" Style="{DynamicResource TitleStyle}" Text="Recent Activity"/>
             <Label Style="{DynamicResource SubtitleStyle}" Text="The following is a list of your most recent landing attempts:"/>
-            <ListView HasUnevenRows="True" SeparatorVisibility="None" BindingContext="{Binding}" ItemsSource="{Binding CurrentActivity}">
+            <ListView  BackgroundColor="Transparent" HasUnevenRows="True" SeparatorVisibility="None" BindingContext="{Binding}" ItemsSource="{Binding CurrentActivity}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout VerticalOptions="Start" Margin="0,0,0,10" Orientation="Vertical">
-                                    <Label FontAttributes="Bold" Style="{DynamicResource SubtitleStyle}" Text="{Binding Status}" />
-                                    <Label Style="{DynamicResource BodyStyle}" Text="{Binding Description}" />
-                                    <Label Opacity="0.7" Margin="0,-5,0,5" Style="{DynamicResource CaptionStyle}" Text="{Binding ActivityDate, StringFormat='{0:dddd hh:mm tt}'}" />
+                                    <Label TextColor="White" FontAttributes="Bold" Style="{DynamicResource SubtitleStyle}" Text="{Binding Status}" />
+                                    <Label TextColor="White" Style="{DynamicResource BodyStyle}" Text="{Binding Description}" />
+                                    <Label TextColor="White" Opacity="0.7" Margin="0,-5,0,5" Style="{DynamicResource CaptionStyle}" Text="{Binding ActivityDate, StringFormat='{0:dddd hh:mm tt}'}" />
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

@@ -171,7 +171,7 @@ namespace DroneLander
 
                             activityToolbarItem.Clicked += (s, e) =>
                             {
-                                this.ActivityPage.Navigation.PushModalAsync(new ViewActivityPage(), true);
+                                this.ActivityPage.Navigation.PushModalAsync(new NavigationPage(new ViewActivityPage()), true);
                             };
 
                             this.ActivityPage.ToolbarItems.Insert(0, activityToolbarItem);
