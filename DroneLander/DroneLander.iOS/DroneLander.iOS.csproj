@@ -91,13 +91,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Renderers\FuelControlRenderer.cs" />
-    <Compile Include="Renderers\ThrottleControlRenderer.cs" />
-    <Compile Include="Services\AudioServices.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="Fonts\Digital.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Info.plist">
       <SubType>Designer</SubType>
     </None>

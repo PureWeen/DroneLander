@@ -90,7 +90,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="Assets\Fonts\Digital.ttf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +100,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderers\FuelControlRenderer.cs" />
-    <Compile Include="Renderers\ThrottleControlRenderer.cs" />
-    <Compile Include="Services\AudioServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -119,7 +115,6 @@
     <Content Include="Assets\DroneLander_71x71.scale-100.png" />
     <Content Include="Assets\DroneLander_splash.scale-100.png" />
     <Content Include="Assets\DroneLander_store.scale-100.png" />
-    <BundleResource Include="Assets\Sounds\engine.m4a" />
     <Content Include="Assets\throttle_thumb.png" />
     <Content Include="drone_lander_back.jpg" />
     <Content Include="Properties\Default.rd.xml" />
