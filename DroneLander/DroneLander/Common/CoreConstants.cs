@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace DroneLander.Common
 {
+    public static class TelemetryConstants
+    {
+        public const string DisplayName = "[DISPLAY_NAME]";
+        public const string Tagline = "[TAG_LINE]";
+    }
+
     public static class MobileServiceConstants
     {
         public const string AppUrl = "https://[YOUR_MOBILE_APP_NAME].azurewebsites.net";

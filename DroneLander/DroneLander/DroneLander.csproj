@@ -51,6 +51,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\LandingParameters.cs" />
+    <Compile Include="Models\TelemetryItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAudioService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
