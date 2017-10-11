@@ -11,6 +11,6 @@ namespace DroneLander.Service.Common
 
         //Replace [ENTER_MISSION_EVENT_NAME] with the event name 
         //value provided by the event facilitator
-        public const string MissionEventName = "[ENTER_MISSION_EVENT_NAME]";
+        public const string MissionEventName = "ENTER_MISSION_EVENT_NAME";
     }
 }
