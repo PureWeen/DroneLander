@@ -6,21 +6,6 @@ using System.Threading.Tasks;
 
 namespace DroneLander.Common
 {
-    public static class TelemetryConstants
-    {
-        public const string DisplayName = "[DISPLAY_NAME]";
-        public const string Tagline = "[TAG_LINE]";
-    }
-
-    public static class MobileServiceConstants
-    {
-        public const string AppUrl = "https://[YOUR_MOBILE_APP_NAME].azurewebsites.net";
-    }
-    public static class MobileCenterConstants
-    {
-        public const string AndroidAppId = "MOBILE_CENTER_ANDROID_APP_ID";
-        public const string iOSAppId = "";
-    }
     public static class CoreConstants
     {
         public const double Gravity = 3.711;      // Mars gravity (m/s2)

@@ -119,7 +119,7 @@
     <Content Include="Assets\DroneLander_71x71.scale-100.png" />
     <Content Include="Assets\DroneLander_splash.scale-100.png" />
     <Content Include="Assets\DroneLander_store.scale-100.png" />
-    <Content Include="Assets\Sounds\engine.m4a" />
+    <BundleResource Include="Assets\Sounds\engine.m4a" />
     <Content Include="Assets\throttle_thumb.png" />
     <Content Include="drone_lander_back.jpg" />
     <Content Include="Properties\Default.rd.xml" />

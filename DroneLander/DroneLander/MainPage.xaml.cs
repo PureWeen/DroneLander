@@ -7,14 +7,13 @@ using Xamarin.Forms;
 
 namespace DroneLander
 {
-    public partial class MainPage : ContentPage
-    {
-
+    public partial class MainPage : ContentPage
+    {
         public MainPage()
         {
             InitializeComponent();
-        }
-
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -29,14 +28,11 @@ namespace DroneLander
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     this.DisplayAlert(title, message, "OK");
-                    App.ViewModel.ResetLanding();
-
+                    App.ViewModel.ResetLanding();
                 });
             });
-        }
-
-
-
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
